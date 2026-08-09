@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProdutoController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
