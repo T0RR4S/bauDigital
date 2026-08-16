@@ -28,6 +28,10 @@
                         <x-nav-link :href="route('email.create')" :active="request()->routeIs('email.create')">
                             {{ __('Enviar E-mail') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('produtos.todos')" :active="request()->routeIs('produtos.todos')">
+                            {{ __('Gerenciar Produtos') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -97,6 +101,10 @@
                 <x-responsive-nav-link :href="route('email.create')" :active="request()->routeIs('email.create')">
                     {{ __('Enviar E-mail') }}
                 </x-responsive-nav-link>
+
+                <x-nav-link :href="route('produtos.todos')" :active="request()->routeIs('produtos.todos')">
+                    {{ __('Gerenciar Produtos') }}
+                </x-nav-link>
             @endif
 
         </div>

@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/enviar-email', [EmailController::class, 'create'])->name('email.create');
     Route::post('/enviar-email', [EmailController::class, 'send'])->name('email.send');
+
+    Route::get('/gerenciar-produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
 });
 
 require __DIR__.'/auth.php';

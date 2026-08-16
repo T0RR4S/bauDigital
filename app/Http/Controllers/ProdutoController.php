@@ -80,7 +80,7 @@ class ProdutoController extends Controller
 
     public function edit(Produto $produto)
     {
-        if ($produto->usuario_id !== auth()->id()) {
+        if ($produto->usuario_id !== auth()->id() && auth()->user()->tipo !== 'admin') {
             abort(403);
         }
 
@@ -91,7 +91,7 @@ class ProdutoController extends Controller
 
     public function update(Request $request, Produto $produto)
     {
-        if ($produto->usuario_id !== auth()->id()) {
+        if ($produto->usuario_id !== auth()->id() && auth()->user()->tipo !== 'admin') {
             abort(403);
         }
 
@@ -126,5 +126,16 @@ class ProdutoController extends Controller
         $produto->delete();
 
         return redirect()->route('produtos.meus')->with('sucesso', 'Produto excluído com sucesso!');
+    }
+
+    public function todosProdutos()
+    {
+        if (auth()->user()->tipo !== 'admin') {
+            abort(403);
+        }
+
+        $produtos = Produto::with('usuario')->paginate(9);
+
+        return view('produtos.todos', compact('produtos'));
     }
 }
