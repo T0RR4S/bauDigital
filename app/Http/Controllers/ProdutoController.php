@@ -101,7 +101,7 @@ class ProdutoController extends Controller
             'preco' => 'required|numeric|min:0',
             'foto' => 'nullable|image|max:4096',
             'decada' => 'nullable|string',
-            'quantidade' => 'required|integer|min:1',
+            'quantidade' => 'required|integer|min:0',
             'categoria_id' => 'required|exists:categorias,id',
         ]);
 
@@ -112,6 +112,8 @@ class ProdutoController extends Controller
             unset($dados['foto']);
         }
 
+        $dados['vendido'] = $dados['quantidade'] <= 0;
+        
         $produto->update($dados);
 
         return redirect()->route('produtos.meus')->with('sucesso', 'Produto atualizado com sucesso!');
